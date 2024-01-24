@@ -55,4 +55,4 @@ Chi-Chi
 Feel free to customize the character list and their attributes in the code.
 
 ## Contributing
-If you'd like to contribute to the project.
+If you'd like to contribute to the project. Please feel free to fork the library and send a pull request.
