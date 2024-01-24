@@ -1,21 +1,26 @@
 import random
 
 class Character:
-    def __init__(self, name, health, power_level):
+    def __init__(self, name, health, power_level, speed):
         self.name = name
         self.health = health
         self.base_power_level = power_level
         self.power_level = power_level
+        self.speed = speed
         self.can_attack = True  # New attribute to track if the character can attack in the current turn
 
     def attack(self, opponent):
         damage = self.power_level * 2
-        opponent.health -= damage
-        print(f"{self.name} attacks {opponent.name} and deals {damage} damage!")
+        if random.uniform(0, 1) > opponent.speed:
+            opponent.health -= damage
+            print(f"{self.name} attacks {opponent.name} and deals {damage} damage!")
+        else:
+            print(f"{opponent.name} evaded {self.name}'s attack!")
+
         self.can_attack = False  # Set to False after attacking
 
     def display_status(self):
-        print(f"{self.name} - Health: {self.health}, Power Level: {self.power_level}")
+        print(f"{self.name} - Health: {self.health}, Power Level: {self.power_level}, Speed: {self.speed}")
 
     def increase_power_level(self):
         self.power_level += 100
@@ -100,26 +105,26 @@ def fight(user_character, opponent):
 
 if __name__ == "__main__":
     characters = [
-        Character("Goku", 1000, 80),
-        Character("Vegeta", 950, 75),
-        Character("Piccolo", 800, 70),
-        Character("Gohan", 850, 65),
-        Character("Frieza", 900, 85),
-        Character("Cell", 950, 90),
-        Character("Majin Buu", 1200, 100),
-        Character("Trunks", 850, 75),
-        Character("Krillin", 750, 60),
-        Character("Tien", 700, 55),
-        Character("Yamcha", 650, 50),
-        Character("Android 18", 900, 80),
-        Character("Broly", 1100, 95),
-        Character("Beerus", 1500, 120),
-        Character("Whis", 2000, 150),
-        Character("Hit", 1200, 110),
-        Character("Jiren", 1800, 130),
-        Character("Pan", 800, 70),
-        Character("Master Roshi", 700, 60),
-        Character("Chi-Chi", 600, 55),
+        Character("Goku", 1000, 80, 0.9),
+        Character("Vegeta", 950, 75, 0.8),
+        Character("Piccolo", 800, 70, 0.7),
+        Character("Gohan", 850, 65, 0.8),
+        Character("Frieza", 900, 85, 0.9),
+        Character("Cell", 950, 90, 0.85),
+        Character("Majin Buu", 1200, 100, 0.75),
+        Character("Trunks", 850, 75, 0.8),
+        Character("Krillin", 750, 60, 0.6),
+        Character("Tien", 700, 55, 0.7),
+        Character("Yamcha", 650, 50, 0.8),
+        Character("Android 18", 900, 80, 0.9),
+        Character("Broly", 1100, 95, 0.7),
+        Character("Beerus", 1500, 120, 0.95),
+        Character("Whis", 2000, 150, 0.98),
+        Character("Hit", 1200, 110, 0.8),
+        Character("Jiren", 1800, 130, 0.99),
+        Character("Pan", 800, 70, 0.7),
+        Character("Master Roshi", 700, 60, 0.6),
+        Character("Chi-Chi", 600, 55, 0.5),
     ]
 
     user_character, opponent = choose_character()
