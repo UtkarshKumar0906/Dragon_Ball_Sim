@@ -2,15 +2,23 @@ class Character:
     def __init__(self, name, health, power_level):
         self.name = name
         self.health = health
+        self.base_power_level = power_level
         self.power_level = power_level
+        self.can_attack = True  # New attribute to track if the character can attack in the current turn
 
     def attack(self, opponent):
         damage = self.power_level * 2
         opponent.health -= damage
         print(f"{self.name} attacks {opponent.name} and deals {damage} damage!")
+        self.can_attack = False  # Set to False after attacking
 
     def display_status(self):
         print(f"{self.name} - Health: {self.health}, Power Level: {self.power_level}")
+
+    def increase_power_level(self):
+        self.power_level += 10000
+        print(f"{self.name}'s power level has increased! New Power Level: {self.power_level}")
+        self.can_attack = False  # Set to False after increasing power level
 
 
 def choose_character():
@@ -53,11 +61,19 @@ def fight(user_character, opponent):
         user_character.display_status()
         opponent.display_status()
 
-        # User's character attacks opponent
-        user_character.attack(opponent)
-        if opponent.health <= 0:
-            print(f"{opponent.name} has been defeated! {user_character.name} wins!")
-            break
+        # Give the player the option to increase power level
+        increase_power = input("Do you want to increase your power level? (yes/no): ").lower()
+        if increase_power == 'yes':
+            user_character.increase_power_level()
+        else:
+            user_character.can_attack = True  # If not increasing power level, the character can attack
+
+        # User's character attacks opponent if allowed
+        if user_character.can_attack:
+            user_character.attack(opponent)
+            if opponent.health <= 0:
+                print(f"{opponent.name} has been defeated! {user_character.name} wins!")
+                break
 
         # Opponent attacks user's character
         opponent.attack(user_character)
