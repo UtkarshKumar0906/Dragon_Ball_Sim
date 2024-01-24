@@ -17,8 +17,6 @@ class Character:
         else:
             print(f"{opponent.name} evaded {self.name}'s attack!")
 
-        self.can_attack = False  # Set to False after attacking
-
     def display_status(self):
         print(f"{self.name} - Health: {self.health}, Power Level: {self.power_level}, Speed: {self.speed}")
 
@@ -61,13 +59,18 @@ def choose_character():
             print("Invalid input. Please enter a number.")
 
 
-def opponent_power_up(opponent):
-    # Randomly determine if the opponent will power up
+def opponent_action(opponent):
+    # Randomly determine if the opponent will power up or attack
     if random.choice([True, False]):
         opponent.increase_power_level()
         print(f"{opponent.name} powered up! New Power Level: {opponent.power_level}")
     else:
-        print(f"{opponent.name} decided not to power up in this round.")
+        if not opponent.can_attack:
+            opponent.increase_power_level()  # If the opponent can't attack, they power up
+            print(f"{opponent.name} powered up! New Power Level: {opponent.power_level}")
+        else:
+            opponent.can_attack = False
+            print(f"{opponent.name} decided to attack this round.")
 
 
 def fight(user_character, opponent):
@@ -77,30 +80,32 @@ def fight(user_character, opponent):
         user_character.display_status()
         opponent.display_status()
 
-        # Give the player the option to increase power level
-        increase_power = input("Do you want to increase your power level? (yes/no): ").lower()
-        if increase_power == 'yes':
+        # Ask the player if they want to power up or attack
+        action = input("Do you want to (p)ower up or (a)ttack? ").lower()
+        if action == 'p':
             user_character.increase_power_level()
-        else:
-            user_character.can_attack = True  # If not increasing power level, the character can attack
+        elif action == 'a':
+            # User's character attacks opponent if allowed
+            if user_character.can_attack:
+                user_character.attack(opponent)
+                if opponent.health <= 0:
+                    print(f"{opponent.name} has been defeated! {user_character.name} wins!")
+                    break
+            else:
+                print("You cannot attack this round after powering up.")
 
-        # Opponent randomly decides to power up or not
-        opponent_power_up(opponent)
+        # Opponent decides to power up or attack
+        opponent_action(opponent)
 
-        # User's character attacks opponent if allowed
-        if user_character.can_attack:
-            user_character.attack(opponent)
-            if opponent.health <= 0:
-                print(f"{opponent.name} has been defeated! {user_character.name} wins!")
+        # Opponent attacks user's character if they decided to attack
+        if opponent.can_attack:
+            opponent.attack(user_character)
+            if user_character.health <= 0:
+                print(f"{user_character.name} has been defeated! {opponent.name} wins!")
                 break
 
-        # Opponent attacks user's character
-        opponent.attack(user_character)
-        if user_character.health <= 0:
-            print(f"{user_character.name} has been defeated! {opponent.name} wins!")
-            break
-
         round_count += 1
+        user_character.can_attack = True  # Reset can_attack to True after each round
 
 
 if __name__ == "__main__":
