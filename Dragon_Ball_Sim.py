@@ -22,14 +22,31 @@ def choose_character():
         try:
             choice = int(input("Enter the number of your chosen character: "))
             if 1 <= choice <= len(characters):
-                return characters[choice - 1]
+                user_character = characters[choice - 1]
+                characters.remove(user_character)  # Remove the chosen character from the list
+                break
+            else:
+                print("Invalid choice. Please enter a valid number.")
+        except ValueError:
+            print("Invalid input. Please enter a number.")
+
+    print("\nChoose your opponent:")
+    for i, character in enumerate(characters, 1):
+        print(f"{i}. {character.name}")
+
+    while True:
+        try:
+            choice = int(input("Enter the number of your chosen opponent: "))
+            if 1 <= choice <= len(characters):
+                opponent = characters[choice - 1]
+                return user_character, opponent
             else:
                 print("Invalid choice. Please enter a valid number.")
         except ValueError:
             print("Invalid input. Please enter a number.")
 
 
-def fight():
+def fight(user_character, opponent):
     round_count = 1
     while user_character.health > 0 and opponent.health > 0:
         print(f"\n--- Round {round_count} ---")
@@ -60,10 +77,8 @@ if __name__ == "__main__":
         Character("Gohan",800000,6000),
     ]
 
-    user_character = choose_character()
+    user_character, opponent = choose_character()
     print(f"\nYou've chosen {user_character.name}!")
+    print(f"You'll be fighting against {opponent.name}!\n")
 
-    opponent = [char for char in characters if char != user_character][0]
-
-    print(f"\nGet ready to fight {opponent.name}!\n")
-    fight()
+    fight(user_character, opponent)
