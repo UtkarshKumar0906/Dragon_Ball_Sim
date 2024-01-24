@@ -32,25 +32,25 @@ Decide whether to power up your character or attack.
 ## Characters
 The game features a diverse set of Dragon Ball characters with varying health points and power levels. Here are some of the characters included:
 
-Goku <break>
-Vegeta<break>
-Piccolo<break>
-Gohan<break>
-Frieza<break>
-Cell<break>
-Majin Buu<break>
-Trunks<break>
-Krillin<break>
-Tien<break>
-Yamcha<break>
-Android 18<break>
-Broly<break>
-Beerus<break>
-Whis<break>
-Hit<break>
-Jiren<break>
-Pan<break>
-Master Roshi<break>
+Goku <br>
+Vegeta<br>
+Piccolo<br>
+Gohan<br>
+Frieza<br>
+Cell<br>
+Majin Buu<br>
+Trunks<br>
+Krillin<br>
+Tien<br>
+Yamcha<br>
+Android 18<br>
+Broly<br>
+Beerus<br>
+Whis<br>
+Hit<br>
+Jiren<br>
+Pan<br>
+Master Roshi<br>
 Chi-Chi
 Feel free to customize the character list and their attributes in the code.
 
