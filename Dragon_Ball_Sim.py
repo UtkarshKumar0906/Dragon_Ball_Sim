@@ -100,11 +100,26 @@ def fight(user_character, opponent):
 
 if __name__ == "__main__":
     characters = [
-        Character("Goku", 500, 80),
-        Character("Broly", 600, 70),
-        Character("Vegeta", 450, 60),
-        Character("Frieza", 400, 75),
-        Character("Gohan", 450, 50),
+        Character("Goku", 1000, 80),
+        Character("Vegeta", 950, 75),
+        Character("Piccolo", 800, 70),
+        Character("Gohan", 850, 65),
+        Character("Frieza", 900, 85),
+        Character("Cell", 950, 90),
+        Character("Majin Buu", 1200, 100),
+        Character("Trunks", 850, 75),
+        Character("Krillin", 750, 60),
+        Character("Tien", 700, 55),
+        Character("Yamcha", 650, 50),
+        Character("Android 18", 900, 80),
+        Character("Broly", 1100, 95),
+        Character("Beerus", 1500, 120),
+        Character("Whis", 2000, 150),
+        Character("Hit", 1200, 110),
+        Character("Jiren", 1800, 130),
+        Character("Pan", 800, 70),
+        Character("Master Roshi", 700, 60),
+        Character("Chi-Chi", 600, 55),
     ]
 
     user_character, opponent = choose_character()
